@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- viewport: imprescindible para que la página sea responsive en móvil -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f2eee5" />
+    <title>Pokédex | Primera generación</title>
+    <!-- ?v=2 → cambiar el número fuerza al navegador a recargar el CSS (evita caché) -->
+    <link rel="stylesheet" href="./assets/js/css/style.css?v=2" />
+  </head>
+  <body>
+    <!-- ================= CABECERA (solo texto estático) ================= -->
+    <!-- Clases BEM: bloque "page-header" + elementos __eyebrow, __title, __intro -->
+    <header class="page-header">
+      <p class="page-header__eyebrow">Kanto · N.º 001–151</p>
+      <h1 class="page-header__title">Pokédex</h1>
+      <p class="page-header__intro">Una colección de la primera generación.</p>
+    </header>
+
+    <main class="pokedex">
+      <!-- ESTADO: JS escribe aquí "Cargando...", éxito o error.
+           role="status" + aria-live → los lectores de pantalla anuncian los cambios -->
+      <p id="estado" class="pokedex__status" role="status" aria-live="polite">
+        Preparando la Pokédex...
+      </p>
+
+      <!-- TABLERO: empieza vacío. JS inserta aquí las 151 tarjetas.
+           id="tablero"        → lo usa JS para encontrarlo
+           class="pokemon-grid" → lo usa CSS para colocar las tarjetas en cuadrícula -->
+      <!-- JavaScript insertará aquí las 151 tarjetas -->
+      <section
+        id="tablero"
+        class="pokemon-grid"
+        aria-label="Pokémon de la primera generación"
+      ></section>
+    </main>
+
+    <!-- ================= MODAL DE DETALLES ================= -->
+    <!-- <dialog> es nativo: JS lo abre con showModal() y cierra con close().
+         aria-labelledby apunta al id="modal-name", que JS crea dentro (el <h2> con el nombre) -->
+    <!-- El diálogo se rellena con los datos del Pokémon seleccionado -->
+    <dialog
+      id="pokemon-modal"
+      class="pokemon-modal"
+      aria-labelledby="modal-name"
+    >
+      <!-- Botón cerrar: JS lo localiza por su clase (querySelector) -->
+      <button
+        class="pokemon-modal__close"
+        type="button"
+        aria-label="Cerrar detalles"
+      >
+        &times;
+      </button>
+      <!-- Hueco que JS rellena cada vez que se pulsa una tarjeta -->
+      <div id="modal-content" class="pokemon-modal__content"></div>
+    </dialog>
+
+    <!-- type="module": se ejecuta tras cargar el HTML y permite import/export -->
+    <!-- <script type="module" src="./assets/js/pokedex.js"></script> -->
+    <script type="module" src="./assets/js/ejercicios.js"></script>
+  </body>
+</html>
